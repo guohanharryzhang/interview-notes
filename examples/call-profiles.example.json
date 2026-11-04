@@ -1,0 +1,42 @@
+[
+  {
+    "id": "example-interview",
+    "company": "Example Company",
+    "role": "Example Role",
+    "experienceOrder": [
+      "inventory",
+      "sensor"
+    ],
+    "preparedAnswers": {
+      "intro": {
+        "question": "Tell me about yourself.",
+        "text": "TEMPLATE \u2014 replace every bracketed field with your own facts before use.\n\nI study [your field]. My recent work includes [actual contribution] and [actual result]."
+      },
+      "why": {
+        "question": "Why do you want this role?",
+        "text": "TEMPLATE \u2014 replace every bracketed field with your own facts before use.\n\nThe part of this role that interests me is [your actual reason]. [A sourced company detail] connects to [your actual work]."
+      },
+      "project": {
+        "question": "Walk me through a project.",
+        "text": "TEMPLATE \u2014 replace every bracketed field with your own facts before use.\n\n[Project] does [purpose]. I built [your contribution], checked it by [actual test], and found [supported result]."
+      },
+      "failure": {
+        "question": "Tell me about a mistake.",
+        "text": "TEMPLATE \u2014 replace every bracketed field with your own facts before use.\n\nI made [actual mistake]. It caused [actual impact]. I changed [actual correction] and checked [actual outcome]."
+      },
+      "conflict": {
+        "question": "Tell me about a disagreement.",
+        "text": "TEMPLATE \u2014 replace every bracketed field with your own facts before use.\n\nWe disagreed about [real decision]. I proposed [your proposal]. After [evidence or discussion], we [actual resolution]."
+      },
+      "questions": {
+        "question": "What questions would you ask?",
+        "text": "TEMPLATE \u2014 replace every bracketed field with your own facts before use.\n\nWhat would the first project involve? How does your team review and test changes?"
+      }
+    },
+    "qa": [],
+    "ask": [
+      "What would the first project involve?",
+      "How does your team review and test changes?"
+    ]
+  }
+]

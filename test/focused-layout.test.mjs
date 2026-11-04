@@ -1,0 +1,33 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import {mkdtemp,rm,mkdir} from 'node:fs/promises';
+import os from 'node:os';
+import path from 'node:path';
+import {chromium} from 'playwright';
+import {createApp} from '../src/server.mjs';
+
+test('interview view keeps reference material out of the workspace and preserves manual questions',async t=>{
+  const runtime=await mkdtemp(path.join(os.tmpdir(),'focused-interview-'));
+  const app=await createApp({port:0,runtime,key:'test',database:{entities:[],claims:[]},answerStream:async function*(){yield {type:'delta',text:'A useful answer with concrete details.'};}});
+  const browser=await chromium.launch({channel:process.env.TEST_BROWSER==='chromium'?undefined:'chrome',headless:true});
+  t.after(async()=>{await browser.close();await app.close();await rm(runtime,{recursive:true,force:true});});
+  const page=await browser.newPage({viewport:{width:1440,height:900}});page.setDefaultTimeout(3500);
+  await page.goto(app.url);await page.waitForFunction(()=>document.querySelector('#connection').textContent==='Ready');
+  assert.equal(await page.isVisible('#question'),false);
+  assert.equal(await page.isVisible('#closingQuestions'),false);
+  assert.equal(await page.isVisible('#roleBrief'),false);
+  assert.equal(await page.isVisible('#captureHint'),false);
+  assert.equal(await page.isVisible('#listen'),true);
+  assert.equal(await page.locator('#quickTopics button:visible').count(),6);
+  const bounds=await page.locator('#answer').boundingBox();assert.ok(bounds.height>500);
+  await page.click('#referenceButton');assert.equal(await page.isVisible('#exportSession'),true);
+  await page.click('#closeReference');
+  await page.click('#manualQuestion summary');await page.fill('#question','What did you build?');await page.click('#answerButton');
+  await page.waitForFunction(()=>document.querySelector('#answerState').textContent==='Ready');
+  assert.match(await page.textContent('#answer'),/concrete details/);
+  await mkdir('test-results',{recursive:true});await page.click('#manualQuestion summary');
+  await page.screenshot({path:'test-results/focused-desktop.png'});
+  await page.setViewportSize({width:390,height:844});
+  assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),true);
+  await page.screenshot({path:'test-results/focused-mobile.png',fullPage:true});
+});

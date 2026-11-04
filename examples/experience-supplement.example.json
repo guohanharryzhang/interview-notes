@@ -1,0 +1,28 @@
+{
+  "inventory": {
+    "pitch": "Fictional example: a tool to record stock changes.",
+    "overview": "Fictional example: a small API project focused on validating stock updates and handling repeated requests.",
+    "behavioralTopics": [
+      "duplicate request",
+      "validation failure"
+    ],
+    "observations": [
+      {
+        "id": "retry-example",
+        "text": "Fictional example: repeated requests could create duplicate updates. The developer reproduced the issue with an integration test and added a request-identifier check.",
+        "source": "Replace with a real source.",
+        "scope": "Demonstration only; do not use as your own story."
+      }
+    ],
+    "answerExampleIds": [
+      "retry-example"
+    ],
+    "followUps": [
+      "How did you reproduce the issue?",
+      "What did you test after the change?"
+    ],
+    "gaps": [
+      "Supply the actual result and your personal contribution."
+    ]
+  }
+}

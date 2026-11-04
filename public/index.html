@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Interview notes</title><link rel="stylesheet" href="/style.css"></head>
+<body>
+  <header class="topbar"><div><h1>Interview notes</h1><p id="interviewLabel">Interview</p></div><div class="topright"><span id="connection" class="connection">Loading</span><button id="referenceButton" class="quiet">Reference</button><button id="setupButton" class="quiet">Setup</button></div></header>
+  <main class="workspace">
+    <aside class="transcript-pane">
+      <div class="section-head"><h2>Transcript</h2><span id="clock">00:00</span></div>
+      <label class="capture-label sr-only" for="captureMode">Audio source</label><select id="captureMode"><option value="system-mic">Mac audio + microphone</option><option value="system">Mac audio only</option><option value="mic">Microphone only (phone calls)</option></select>
+      <div class="mic-controls"><button id="listen" class="primary">Start listening</button><button id="pause" disabled>Pause</button></div>
+      <div class="meter" hidden><span id="level"></span></div>
+      <div class="mic-label" hidden><span id="micStatus">Audio off</span></div>
+      <div class="source-meters"><div id="systemAudioRow"><div>Mac audio <span id="systemAudioStatus">Off</span></div><div class="meter"><span id="systemAudioLevel"></span></div></div><div id="microphoneAudioRow"><div>Microphone <span id="microphoneAudioStatus">Off</span></div><div class="meter"><span id="microphoneAudioLevel"></span></div></div></div>
+      <label class="toggle"><input id="automatic" type="checkbox" checked><span>Auto answers</span></label>
+      <div id="transcript" class="transcript" aria-label="Live transcript"><p class="empty-transcript">Transcript appears here. Select a question to answer it.</p></div>
+    </aside>
+    <section class="answer-pane">
+      <div class="section-head"><h2>Answer</h2><div class="answer-tools"><span id="timing"></span><label class="hold-control"><input type="checkbox" id="holdAnswer">Hold</label></div></div>
+      <nav id="quickTopics" class="quick-topics" aria-label="Common interview questions"><button data-topic="intro">Introduction</button><button data-topic="why">Why this company</button><button data-topic="project">Project</button><button data-topic="failure">Mistake</button><button data-topic="conflict">Disagreement</button><button data-topic="questions">Questions to ask</button></nav>
+      <div id="pendingQuestion" class="pending-question" hidden><span id="pendingText"></span><button id="usePending">Use question</button></div>
+      <div id="notice" class="notice" role="status" hidden></div>
+      <div id="answer" class="answer" aria-live="polite"><div class="empty-answer"><p>Choose a prepared answer or start listening.</p><button id="example" hidden>Try your introduction</button></div></div>
+      <div class="answer-actions"><button id="spokenAnswer" class="quiet" disabled>Spoken version</button><button id="details" class="quiet" disabled>Deep dive</button><button id="copy" class="text-button" disabled>Copy</button><span id="answerState"></span></div>
+      <details id="manualQuestion" class="manual-question"><summary>Type or edit a question</summary><form id="questionForm" class="question-form"><label for="question">Question</label><textarea id="question" rows="2" placeholder="What did you personally contribute to the automation project?" maxlength="6000"></textarea><div class="question-bottom"><span>⌘ Enter to answer · Esc to cancel</span><button id="answerButton" class="primary" type="submit">Answer question</button></div></form></details>
+    </section>
+  </main>
+  <dialog id="reference"><div class="dialog-head"><h2>Reference</h2><button id="closeReference" type="button" aria-label="Close reference">×</button></div>
+      <details class="last-minute"><summary>Last-minute prep</summary><div id="prepNotes"></div></details>
+      <details id="callCard" class="call-card" hidden><summary>Call details</summary><dl id="callFacts"></dl></details>
+      <details class="experience-reference"><summary>Experience reference</summary><label for="experience">Choose an experience</label><select id="experience"><option value="">Loading…</option></select><div class="reference-actions"><button id="readExperience" type="button">Read notes</button><button id="deepExperience" type="button">Deep dive</button></div></details>
+      <details class="role-reference"><summary>Relevant experience <span id="focusLabel"></span></summary><div id="roleBrief"></div></details>
+      <details class="closing-reference"><summary>Questions to ask them</summary><ul id="closingQuestions"></ul></details>
+      <details class="sources"><summary>Source notes <span id="sourceCount"></span></summary><div id="sources"></div></details>
+<details class="audio-help"><summary>Audio help</summary>      <p class="hint" id="captureHint">Choose Entire Screen and enable Share system audio when Chrome asks. Works with headphones.</p>
+      <p class="privacy">Audio from the selected sources is sent to OpenAI while listening. Screen video is not sent or saved. Pause stops all capture. No automatic recording. Use with the other participants’ permission.</p>
+</details><div class="reference-footer"><button id="exportSession" class="quiet" disabled>Download session</button><button id="clear" class="text-button">Clear session</button></div></dialog>
+  <dialog id="setup"><form id="settingsForm"><div class="dialog-head"><h2>Interview setup</h2><button id="closeSetup" type="button" aria-label="Close setup">×</button></div><p class="hint" id="databaseStatus"></p>
+    <label>Saved interview<select id="savedSetup"><option value="">Current setup</option></select></label>
+    <label>Company<input id="company" maxlength="180" placeholder="Company name"></label>
+    <label>Role<input id="role" maxlength="240" placeholder="Job title"></label>
+    <label>Job description or interview notes<textarea id="posting" rows="4" maxlength="14000" placeholder="Paste the relevant job description here."></textarea></label>
+    <div class="setup-row"><label>Interview stage<select id="stage"><option value="recruiter">Recruiter screen</option><option value="technical">Technical interview</option><option value="manager">Hiring manager / behavioral</option></select></label><label>Experience focus<select id="focus"><option value="auto">Choose from job title</option><option value="software">Software</option><option value="hardware">Electrical / hardware</option><option value="embedded">Embedded / robotics</option><option value="research">Research</option><option value="general">General engineering</option></select></label></div>
+    <label>Company research<textarea id="companyResearch" rows="3" maxlength="8000" placeholder="One specific product, problem or engineering detail. Include a source link and date."></textarea></label>
+    <label>Your reason for this role<textarea id="motivation" rows="2" maxlength="2500" placeholder="What interests you personally, and how it connects to your work."></textarea></label>
+    <p class="hint">Saved separately for each company and role. Your experience library is shared across interviews. Edit .runtime/experience.json and restart the server to update your background.</p>
+    <label>Microphone<select id="device"><option value="">Default microphone</option></select></label>
+    <label>Microphone sensitivity<select id="threshold"><option value="0.006">Higher — quieter speakerphone</option><option value="0.012" selected>Normal</option><option value="0.025">Lower — noisy room</option></select></label>
+    <details><summary>Model settings</summary><label>Answer model<select id="answerModel"><option value="gpt-5.4-mini">GPT-5.4 mini — fast</option><option value="gpt-5.4">GPT-5.4</option><option value="gpt-4.1-mini">GPT-4.1 mini</option></select></label><label>Transcription<select id="transcriptionModel"><option value="gpt-live-transcribe">Live transcription</option><option value="gpt-4o-mini-transcribe">GPT-4o mini transcription — compatibility option</option><option value="gpt-4o-transcribe">GPT-4o transcription — compatibility option</option></select></label></details>
+    <div class="key-section"><label>OpenAI API key <span id="keyStatus"></span><input id="apiKey" type="password" autocomplete="off" placeholder="sk-…" spellcheck="false"></label><p class="hint">Saved in macOS Keychain when available; otherwise kept for this server session. Never saved in browser storage. Leave blank to keep the current key.</p></div>
+    <p id="setupError" class="form-error" role="alert"></p><button class="primary" id="saveSettings">Save setup</button>
+  </form></dialog>
+  <script type="module" src="/app.mjs"></script>
+</body></html>

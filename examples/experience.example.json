@@ -1,0 +1,90 @@
+{
+  "_example_notice": "Entirely fictional demonstration. Replace with your own facts before use.",
+  "owner": "Example Candidate",
+  "profile": {
+    "education": {
+      "degree": "Your actual degree",
+      "institution": "Your institution",
+      "expected_graduation": "Your actual graduation date"
+    },
+    "logistics": {
+      "availability": "Enter your actual availability",
+      "location_preferences": "Enter your preferences; do not infer them from a job location"
+    }
+  },
+  "entities": [
+    {
+      "id": "inventory",
+      "name": "Inventory tracker (fictional example)",
+      "organization": "Example Organization",
+      "title": "Project developer",
+      "dates": {
+        "display": "Your project dates"
+      },
+      "aliases": [
+        "stock checker",
+        "inventory API"
+      ],
+      "tags": [
+        "software"
+      ]
+    },
+    {
+      "id": "sensor",
+      "name": "Sensor dashboard (fictional example)",
+      "title": "Team member",
+      "aliases": [
+        "sensor dashboard"
+      ],
+      "tags": [
+        "hardware",
+        "embedded"
+      ]
+    }
+  ],
+  "claims": [
+    {
+      "id": "inventory-api",
+      "entity_id": "inventory",
+      "text": "Fictional example: implemented an API that rejected invalid stock changes and added integration tests for duplicate requests.",
+      "ownership": "State the part you personally built and distinguish team work.",
+      "skills": [
+        "Python",
+        "API testing"
+      ],
+      "scope_notes": [
+        "No production performance or user count supplied."
+      ],
+      "sources": [
+        "Replace with your own notes or project reference."
+      ]
+    },
+    {
+      "id": "sensor-bench",
+      "entity_id": "sensor",
+      "text": "Fictional example: checked serial messages from a sensor board and documented a reproducible startup error.",
+      "ownership": "Team contribution; describe your own work.",
+      "scope_notes": [
+        "No claim of sole ownership or field deployment."
+      ],
+      "sources": [
+        "Replace with your own notes."
+      ]
+    }
+  ],
+  "metrics": [],
+  "skills": [
+    {
+      "id": "skill_python",
+      "name": "Python",
+      "entity_ids": [
+        "inventory"
+      ],
+      "claim_ids": [
+        "inventory-api"
+      ],
+      "scope_notes": "Describe your actual level and use."
+    }
+  ],
+  "coursework": []
+}
